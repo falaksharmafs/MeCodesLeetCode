@@ -4,7 +4,7 @@ public:
 
         unordered_set<string> st(begin(folder),end(folder));
         vector<string>result;
-        for(string currFolder : folder){
+        for(string &currFolder : folder){
 
             bool isSubfolder = false;
             string temp = currFolder;
