@@ -1,96 +1,53 @@
 class Solution {
 public:
+    typedef pair<int,int> P;
     string longestDiverseString(int a, int b, int c) {
+        priority_queue<P,vector<P>>pq;
 
-        string ans = "";
+        if(a>0){
+            pq.push({a,'a'});
 
-        while (a > 0 || b > 0 || c > 0) {
+        }
+        if(b>0){
+            pq.push({b,'b'});
+        }
 
-            if (a >= b && a >= c) {
+        if(c>0){
+            pq.push({c,'c'});
+        }
 
-                if (ans.size() < 2 || !(ans.back() == 'a' && ans[ans.size()-2] == 'a')) {
+        string result = "";
 
-                    ans += 'a';
-                    a--;
+        while(!pq.empty()){
+            int currcount = pq.top().first;
+            int currchar = pq.top().second;
+            pq.pop();
 
-                    if (a > 0) {
-                        ans += 'a';
-                        a--;
-                    }
+            if(result.length() >=2 && result[result.length()-1]==currchar && result[result.length()-2]==currchar){
+                if(pq.empty()){
+                    break;
                 }
+                int nextcount = pq.top().first;
+                int nextchar = pq.top().second;
+                pq.pop();
 
-                else {
-                    if (b >= c && b > 0) {
-                        ans += 'b';
-                        b--;
-                    }
-                    else if (c > 0) {
-                        ans += 'c';
-                        c--;
-                    }
-                    else {
-                        break;
-                    }
+                result.push_back(nextchar);
+                nextcount--;
+                if(nextcount>0){
+                    pq.push({nextcount,nextchar});
                 }
+            } else{
+                result.push_back(currchar);
+                currcount--;
             }
 
-            else if (b >= a && b >= c) {
-
-                if (ans.size() < 2 || !(ans.back() == 'b' && ans[ans.size()-2] == 'b')) {
-
-                    ans += 'b';
-                    b--;
-
-                    if (b > 0) {
-                        ans += 'b';
-                        b--;
-                    }
-                }
-
-                else {
-                    if (a >= c && a > 0) {
-                        ans += 'a';
-                        a--;
-                    }
-                    else if (c > 0) {
-                        ans += 'c';
-                        c--;
-                    }
-                    else {
-                        break;
-                    }
-                }
-            }
-
-            else {
-
-                if (ans.size() < 2 || !(ans.back() == 'c' && ans[ans.size()-2] == 'c')) {
-
-                    ans += 'c';
-                    c--;
-
-                    if (c > 0) {
-                        ans += 'c';
-                        c--;
-                    }
-                }
-
-                else {
-                    if (a >= b && a > 0) {
-                        ans += 'a';
-                        a--;
-                    }
-                    else if (b > 0) {
-                        ans += 'b';
-                        b--;
-                    }
-                    else {
-                        break;
-                    }
-                }
+            if(currcount>0){
+                pq.push({currcount,currchar});
             }
         }
 
-        return ans;
+        return result;
+
+        
     }
 };
