@@ -22,29 +22,24 @@ public:
     static bool myfunc(string &word1, string &word2){
         return word1.length()< word2.length();
     }
-    int lis(vector<string>& words , int i, int p){
-        if(i>=n){
-            return 0;
-        }
-        if(p != -1 && t[i][p] != -1){
-            return t[i][p];
-        }
-        int taken = 0;
 
-        if(p == -1 || isPred(words[i],words[p])){
-            taken = 1 + lis(words,i+1,i);
-        }
-        int skip = lis(words,i+1,p);
-        if(p != -1)
-           t[i][p]= max(taken,skip);
-        return max(skip,taken);
-    }
     int longestStrChain(vector<string>& words) {
-
-        memset(t,-1,sizeof(t));
         n = words.size();
         sort(begin(words),end(words),myfunc);
 
-        return lis(words,0,-1);        
+        vector<int> t(n,1);
+        int maxL = 1;
+
+        for(int k= 0; k < n ; k++){
+            for(int j = 0 ; j < k ; j++){
+
+                if(isPred(words[k],words[j])){
+                    t[k]= max(t[k],t[j]+1);
+                    maxL = max(maxL,t[k]);
+                }
+            }
+        }
+
+        return maxL;        
     }
 };
