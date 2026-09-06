@@ -11,15 +11,11 @@ public:
 
         int ans = 0;
 
-        while(l < r){
-
+        for(int i = 0 ; i < n/3 ; i++){
             r--;
-
+            l++;
             ans += piles[r];
             r--;
-
-            l++;
-
         }
 
         return ans;
