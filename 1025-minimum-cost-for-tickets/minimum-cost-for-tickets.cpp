@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int t[366];
+    int t[365];
     int solve(int i,vector<int>& days, vector<int>& costs){
         if(i>=days.size()){
             return 0;
