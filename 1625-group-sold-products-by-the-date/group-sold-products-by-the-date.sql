@@ -7,4 +7,4 @@ select sell_date,
       ) as products
 from Activities
 group by sell_date
-order by sell_date,product
+order by sell_date
