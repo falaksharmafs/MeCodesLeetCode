@@ -12,6 +12,6 @@ union all
 
 select product_id, 'store2' as store,store2 as price
 from Products
-where store2 is not null
+where store2 is not null;
 
 
