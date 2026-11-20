@@ -16,7 +16,7 @@ public:
 
         // now gping along the vertical ladder to see kitne subarray sum kar rahe hai 'k'
 
-        long result = 0;
+        int result = 0;
 
         for(int startc =0; startc < cols;startc++){
             for(int i =startc;i<cols;i++){
